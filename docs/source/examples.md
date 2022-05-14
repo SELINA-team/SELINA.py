@@ -252,7 +252,7 @@ meta['celltypes'].keys()
 dict_keys(['Mucous', 'CD8T', 'Fibroblast', 'Macrophage', 'Chondrocyte', 'DC', 'AT2', 'Endothelial_lv3', 'NK', 'Neutrophil', 'Alveolar Bipotent', 'AT1', 'Lymphatic Endothelial', 'Muscle', 'Mast', 'Secretory Epithelial', 'Club', 'Basal', 'Alveolar Bipotent Progenitor', 'Goblet', 'CD4T', 'Megakaryocyte', 'Intermediate(Club-Basal)', 'Ionocyte', 'B', 'Neuroendocrine', 'Ciliated', 'Monocyte'])
 ```
 
-## 4. Predict
+### 4. Predict
 
 Here you can choose to use our pre-trained models (available on [SELINA models](https://github.com/wanglabtongji/SELINA_reference)) or the model trained by yourself to annotate the query data.
 
