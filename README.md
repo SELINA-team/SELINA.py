@@ -48,7 +48,7 @@ conda install pytorch cudatoolkit
 
 ### Preprocess of query data
 
-This step is to normalize, convert the genes to version hg38 and symbol names, perform dimension reduction and clustering for your data. SELINA supports 3 formats of input: `plain`,`h5` and `mtx`. The gene by cell matrix is in plain format. Below are examples of the commands for preprocessing different formats of input data.
+This step is to normalize, convert the genes to version hg38 and symbol names, perform dimension reduction and clustering for your data. SELINA supports 3 formats of input: `plain`,`h5` and `mtx`. The gene by cell matrix is in plain format. Below are examples of the commands for preprocessing different formats of input data. We provide an example query file with plain format in the demos folder.
 
 ```
 #mtx
@@ -58,10 +58,10 @@ selina preprocess --format mtx --matrix ./query/matrix.mtx --feature ./query/fea
 selina preprocess --format h5 --matrix ./query/query_gene_count.h5 --mode single --mode single --directory ./res/preprocess/
 
 #plain
-selina preprocess --format plain --matrix ./query/query_expr.txt --mode single --directory ./res/preprocess/
+selina preprocess --format plain --matrix ./query/query.txt --mode single --directory ./res/preprocess/
 ```
 
-Running any one of the above commands will generate three output files:
+Running any one of the above commands will generate four output files:
 
 - `query_res.rds`: a seurat object storing the normalized data, dimension reduction and clustering results
 
@@ -73,7 +73,7 @@ Running any one of the above commands will generate three output files:
 
 ### Pre-training of the reference data
 
-In this step you can train a model using your own reference data with the following command.
+In this step you can train a model using your own reference data with the following command. We provide two example reference files in the demos folder.
 
 ```
 selina train --path-in ./reference/ --path-out ./res/pre-train
@@ -114,7 +114,7 @@ if the input data is one single-cell level expression matrix, four additional fi
 
 ## Documentation
 
-For further details of usage, please refer to [SELINA documentation](https://SELINA.readthedocs.io/en/latest/index.html)
+For further details of usage, please refer to [SELINA documentation](https://selina.readthedocs.io/en/latest/)
 
 ## Citation
 
