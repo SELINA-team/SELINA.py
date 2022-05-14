@@ -254,7 +254,7 @@ dict_keys(['Mucous', 'CD8T', 'Fibroblast', 'Macrophage', 'Chondrocyte', 'DC', 'A
 
 ### 4. Predict
 
-Here you can choose to use our pre-trained models (available on [SELINA models](https://github.com/wanglabtongji/SELINA_reference)) or the model trained by yourself to annotate the query data.
+Here you can choose to use our pre-trained models (available on [SELINA models](https://github.com/SELINA-team/SELINA-reference/tree/main/Normal/)) or the model trained by yourself to annotate the query data.
 
 ```
 selina predict --mode single --query-expr ./res/preprocess/example1/example1_single_expr.txt  --model ./res/pre-train/pre-trained_params.pt --seurat ./res/preprocess/example1/example1_res.rds --cell-cutoff 5 --prob-cutoff 0.9 --path-out ./res/predict/example1 --outprefix example1
@@ -357,7 +357,7 @@ This command will output four files that are similar to the results in example1 
 
 ### 3. Predict
 
-Here we used the pre-trained model provided by SELINA to predict for the NSCLC data, thus the pre-training step can be skipped. Note that the `--disease` argument is added in the following command.
+Here we used the (pre-trained model)[https://github.com/SELINA-team/SELINA-reference/tree/main/Disease/] provided by SELINA to predict for the NSCLC data, thus the pre-training step can be skipped. Note that the `--disease` argument is added in the following command.
 
 ```
 selina predict --mode single --query-expr ./res/preprocess/example2/example2_single_expr.txt  --model ./res/pre-train/Lung_params.pt --seurat ./res/preprocess/example2/example2_res.rds --cell-cutoff 5 --prob-cutoff 0.9 --path-out ./res/predict/example2 --outprefix example2 --disease
