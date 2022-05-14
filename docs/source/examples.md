@@ -345,7 +345,7 @@ This example shows how to predict for data from tissues with diseases.
 
 ### 1. data
 
-The data used here is one dataset with non-small-cell lung carcinoma(NSCLC) from (Phenotype molding of stromal cells in the lung tumor microenvironment)[https://www.nature.com/articles/s41591-018-0096-5] in mtx format. The model here used to predict is one pre-trained model that was trained on immune cells of various tissues and lung-specific cells from SELINA reference.
+The data used here is one dataset with non-small-cell lung carcinoma(NSCLC) from [Phenotype molding of stromal cells in the lung tumor microenvironment](https://www.nature.com/articles/s41591-018-0096-5) in mtx format. The model here used to predict is one pre-trained model that was trained on immune cells of various tissues and lung-specific cells from SELINA reference.
 
 ### 2. Preprocess of query data
 
@@ -357,7 +357,7 @@ This command will output four files that are similar to the results in example1 
 
 ### 3. Predict
 
-Here we used the (pre-trained model)[https://github.com/SELINA-team/SELINA-reference/tree/main/Disease/] provided by SELINA to predict for the NSCLC data, thus the pre-training step can be skipped. Note that the `--disease` argument is added in the following command.
+Here we used the [pre-trained model](https://github.com/SELINA-team/SELINA-reference/tree/main/Disease/) provided by SELINA to predict for the NSCLC data, thus the pre-training step can be skipped. Note that the `--disease` argument is added in the following command.
 
 ```
 selina predict --mode single --query-expr ./res/preprocess/example2/example2_single_expr.txt  --model ./res/pre-train/Lung_params.pt --seurat ./res/preprocess/example2/example2_res.rds --cell-cutoff 5 --prob-cutoff 0.9 --path-out ./res/predict/example2 --outprefix example2 --disease
