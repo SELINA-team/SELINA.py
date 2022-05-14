@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prepare &mdash; Selina v1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Run SELINA" href="run.html" />
+    <link rel="prev" title="SELINA’s documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Selina
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Prepare</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prepare-data">Prepare data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#preprocess-of-training-data">Preprocess of training data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#preprocess-of-query-data">Preprocess of query data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="run.html">Run SELINA</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="demo.html">Demo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Selina</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Prepare</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/prepare.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="prepare">
+<h1>Prepare<a class="headerlink" href="#prepare" title="Permalink to this headline"></a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h2>
+<p>SELINA is supported for macOS, Linux and Windows.
+To use SELINA, you should first build a conda environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">Selina</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">Selina</span>
+</pre></div>
+</div>
+<p>Then you can install SELINA using the following command(All the dependency packages will be installed simultaneously).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">pfren</span> <span class="n">selina</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="o">-</span><span class="n">c</span> <span class="n">r</span>
+</pre></div>
+</div>
+<p>Note that if you have gpu on your device, you should additionally run the following command after the above commands are executed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">pytorch</span> <span class="n">cudatoolkit</span>
+</pre></div>
+</div>
+</section>
+<section id="prepare-data">
+<h2>Prepare data<a class="headerlink" href="#prepare-data" title="Permalink to this headline"></a></h2>
+<section id="preprocess-of-training-data">
+<h3>Preprocess of training data<a class="headerlink" href="#preprocess-of-training-data" title="Permalink to this headline"></a></h3>
+<p>Before you start to run SELINA, make sure you have prepared the proper reference datasets, the format is shown as below. For each reference datasets, you should have 2 paired files, one is named as xx_expr.txt, this file contains the gene expression, and the other is named as xx_meta.txt. For the expression profile, the first column is gene which is followed by expression of each cell.
+For the meta file, the first column is celltype of each cell, and the second column is platform of each cell. Note that if you choose to use our pretarined models, this step can be skipped.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>reference/
+├── train1_expr.txt
+├── train1_meta.txt
+├── train2_expr.txt
+└── train2_meta.txt
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="center">Gene</th>
+<th align="center">Cell1</th>
+<th align="center">Cell2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">NOC2L</td>
+<td align="center">7</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">ISG15</td>
+<td align="center">10</td>
+<td align="center">2</td>
+</tr>
+</tbody>
+</table><table border="1" class="docutils">
+<thead>
+<tr>
+<th align="center">Celltype</th>
+<th align="center">Platform</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">CD8T</td>
+<td align="center">10x</td>
+</tr>
+<tr>
+<td align="center">CD4T</td>
+<td align="center">10x</td>
+</tr>
+</tbody>
+</table></section>
+<section id="preprocess-of-query-data">
+<h3>Preprocess of query data<a class="headerlink" href="#preprocess-of-query-data" title="Permalink to this headline"></a></h3>
+<p>In addition to the training data, you also need to preprocess the query data. This step is to normalize, match the assembly version with the reference data, perform dimension reduction for your data. We support 3 formats of input: <code class="docutils literal notranslate"><span class="pre">plain</span></code>,<code class="docutils literal notranslate"><span class="pre">h5</span></code> and <code class="docutils literal notranslate"><span class="pre">mtx</span></code>. The plain format is a gene by cell matrix. The full list of preprocessing commands is shown as below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">selina</span> <span class="n">preprocess</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="nb">format</span> <span class="p">{</span><span class="n">h5</span><span class="p">,</span><span class="n">mtx</span><span class="p">,</span><span class="n">plain</span><span class="p">}]</span> <span class="p">[</span><span class="o">--</span><span class="n">matrix</span> <span class="n">MATRIX</span><span class="p">]</span>
+                          <span class="p">[</span><span class="o">--</span><span class="n">separator</span> <span class="p">{</span><span class="n">tab</span><span class="p">,</span><span class="n">space</span><span class="p">,</span><span class="n">comma</span><span class="p">}]</span> <span class="p">[</span><span class="o">--</span><span class="n">feature</span> <span class="n">FEATURE</span><span class="p">]</span>
+                          <span class="p">[</span><span class="o">--</span><span class="n">gene</span><span class="o">-</span><span class="n">column</span> <span class="n">GENE_COLUMN</span><span class="p">]</span>
+                          <span class="p">[</span><span class="o">--</span><span class="n">gene</span><span class="o">-</span><span class="n">idtype</span> <span class="p">{</span><span class="n">symbol</span><span class="p">,</span><span class="n">ensembl</span><span class="p">}]</span> <span class="p">[</span><span class="o">--</span><span class="n">barcode</span> <span class="n">BARCODE</span><span class="p">]</span>
+                          <span class="p">[</span><span class="o">--</span><span class="n">assembly</span> <span class="p">{</span><span class="n">GRCh38</span><span class="p">,</span><span class="n">GRCh37</span><span class="p">}]</span>
+                          <span class="p">[</span><span class="o">--</span><span class="n">count</span><span class="o">-</span><span class="n">cutoff</span> <span class="n">COUNT_CUTOFF</span><span class="p">]</span>
+                          <span class="p">[</span><span class="o">--</span><span class="n">gene</span><span class="o">-</span><span class="n">cutoff</span> <span class="n">GENE_CUTOFF</span><span class="p">]</span>
+                          <span class="p">[</span><span class="o">--</span><span class="n">cell</span><span class="o">-</span><span class="n">cutoff</span> <span class="n">CELL_CUTOFF</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">directory</span> <span class="n">DIRECTORY</span><span class="p">]</span>
+                          <span class="p">[</span><span class="o">--</span><span class="n">outprefix</span> <span class="n">OUTPREFIX</span><span class="p">]</span> <span class="o">--</span><span class="n">mode</span> <span class="p">{</span><span class="n">single</span><span class="p">,</span><span class="n">cluster</span><span class="p">,</span><span class="n">both</span><span class="p">}</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+
+<span class="n">Input</span> <span class="n">files</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">--</span><span class="nb">format</span> <span class="p">{</span><span class="n">h5</span><span class="p">,</span><span class="n">mtx</span><span class="p">,</span><span class="n">plain</span><span class="p">}</span>
+                        <span class="n">Format</span> <span class="n">of</span> <span class="n">the</span> <span class="n">count</span> <span class="n">matrix</span> <span class="n">file</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">matrix</span> <span class="n">MATRIX</span>       <span class="n">Location</span> <span class="n">of</span> <span class="n">count</span> <span class="n">matrix</span> <span class="n">file</span><span class="o">.</span> <span class="n">If</span> <span class="n">the</span> <span class="nb">format</span> <span class="ow">is</span> <span class="s1">&#39;h5&#39;</span>
+                        <span class="ow">or</span> <span class="s1">&#39;plain&#39;</span><span class="p">,</span> <span class="n">users</span> <span class="n">need</span> <span class="n">to</span> <span class="n">specify</span> <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span>
+                        <span class="n">count</span> <span class="n">matrix</span> <span class="n">file</span><span class="o">.</span><span class="n">If</span> <span class="n">the</span> <span class="nb">format</span> <span class="ow">is</span> <span class="s1">&#39;mtx&#39;</span><span class="p">,</span> <span class="n">the</span> <span class="s1">&#39;matrix&#39;</span>
+                        <span class="n">should</span> <span class="n">be</span> <span class="n">the</span> <span class="n">name</span> <span class="n">of</span> <span class="o">.</span><span class="n">mtx</span> <span class="n">formatted</span> <span class="n">matrix</span> <span class="n">file</span><span class="p">,</span> <span class="n">such</span>
+                        <span class="k">as</span> <span class="s1">&#39;matrix.mtx&#39;</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">separator</span> <span class="p">{</span><span class="n">tab</span><span class="p">,</span><span class="n">space</span><span class="p">,</span><span class="n">comma</span><span class="p">}</span>
+                        <span class="n">The</span> <span class="n">separating</span> <span class="n">character</span> <span class="p">(</span><span class="n">only</span> <span class="k">for</span> <span class="n">the</span> <span class="nb">format</span> <span class="n">of</span>
+                        <span class="s1">&#39;plain&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">Values</span> <span class="n">on</span> <span class="n">each</span> <span class="n">line</span> <span class="n">of</span> <span class="n">the</span> <span class="n">plain</span> <span class="n">matrix</span> <span class="n">file</span>
+                        <span class="n">will</span> <span class="n">be</span> <span class="n">separated</span> <span class="n">by</span> <span class="n">the</span> <span class="n">character</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="n">tab</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">feature</span> <span class="n">FEATURE</span>     <span class="n">Location</span> <span class="n">of</span> <span class="n">feature</span> <span class="n">file</span> <span class="p">(</span><span class="n">required</span> <span class="k">for</span> <span class="n">the</span> <span class="nb">format</span> <span class="n">of</span>
+                        <span class="s1">&#39;mtx&#39;</span><span class="p">)</span><span class="o">.</span> <span class="n">Features</span> <span class="n">correspond</span> <span class="n">to</span> <span class="n">row</span> <span class="n">indices</span> <span class="n">of</span> <span class="n">count</span>
+                        <span class="n">matrix</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="n">features</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">gene</span><span class="o">-</span><span class="n">column</span> <span class="n">GENE_COLUMN</span>
+                        <span class="n">If</span> <span class="n">the</span> <span class="nb">format</span> <span class="ow">is</span> <span class="s1">&#39;mtx&#39;</span><span class="p">,</span> <span class="n">please</span> <span class="n">specify</span> <span class="n">which</span> <span class="n">column</span> <span class="n">of</span>
+                        <span class="n">the</span> <span class="n">feature</span> <span class="n">file</span> <span class="n">to</span> <span class="n">use</span> <span class="k">for</span> <span class="n">gene</span> <span class="n">names</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="mf">2.</span>
+  <span class="o">--</span><span class="n">gene</span><span class="o">-</span><span class="n">idtype</span> <span class="p">{</span><span class="n">symbol</span><span class="p">,</span><span class="n">ensembl</span><span class="p">}</span>
+                        <span class="n">Type</span> <span class="n">of</span> <span class="n">gene</span> <span class="n">name</span><span class="p">,</span> <span class="s1">&#39;symbol&#39;</span> <span class="k">for</span> <span class="n">gene</span> <span class="n">symbol</span> <span class="ow">and</span>
+                        <span class="s1">&#39;ensembl&#39;</span> <span class="k">for</span> <span class="n">ensembl</span> <span class="nb">id</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="n">symbol</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">barcode</span> <span class="n">BARCODE</span>     <span class="n">Location</span> <span class="n">of</span> <span class="n">barcode</span> <span class="n">file</span> <span class="p">(</span><span class="n">required</span> <span class="k">for</span> <span class="n">the</span> <span class="nb">format</span> <span class="n">of</span>
+                        <span class="s1">&#39;mtx&#39;</span><span class="p">)</span><span class="o">.</span> <span class="n">Cell</span> <span class="n">barcodes</span> <span class="n">correspond</span> <span class="n">to</span> <span class="n">column</span> <span class="n">indices</span> <span class="n">of</span>
+                        <span class="n">count</span> <span class="n">matrix</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="n">barcodes</span><span class="o">.</span><span class="n">tsv</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">assembly</span> <span class="p">{</span><span class="n">GRCh38</span><span class="p">,</span><span class="n">GRCh37</span><span class="p">}</span>
+                        <span class="n">Assembly</span> <span class="p">(</span><span class="n">GRCh38</span><span class="o">/</span><span class="n">hg38</span> <span class="ow">and</span> <span class="n">GRCh37</span><span class="o">/</span><span class="n">hg19</span><span class="p">)</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span>
+                        <span class="n">GRCh38</span><span class="o">.</span>
+
+<span class="n">Quality</span> <span class="n">control</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">--</span><span class="n">count</span><span class="o">-</span><span class="n">cutoff</span> <span class="n">COUNT_CUTOFF</span>
+                        <span class="n">Cutoff</span> <span class="k">for</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">each</span> <span class="n">cell</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span>
+                        <span class="mf">1000.</span>
+  <span class="o">--</span><span class="n">gene</span><span class="o">-</span><span class="n">cutoff</span> <span class="n">GENE_CUTOFF</span>
+                        <span class="n">Cutoff</span> <span class="k">for</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">genes</span> <span class="n">included</span> <span class="ow">in</span> <span class="n">each</span> <span class="n">cell</span><span class="o">.</span>
+                        <span class="n">DEFAULT</span><span class="p">:</span> <span class="mf">500.</span>
+  <span class="o">--</span><span class="n">cell</span><span class="o">-</span><span class="n">cutoff</span> <span class="n">CELL_CUTOFF</span>
+                        <span class="n">Cutoff</span> <span class="k">for</span> <span class="n">the</span> <span class="n">number</span> <span class="n">of</span> <span class="n">cells</span> <span class="n">covered</span> <span class="n">by</span> <span class="n">each</span> <span class="n">gene</span><span class="o">.</span>
+                        <span class="n">DEFAULT</span><span class="p">:</span> <span class="mf">10.</span>
+
+<span class="n">Output</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">--</span><span class="n">directory</span> <span class="n">DIRECTORY</span>
+                        <span class="n">Path</span> <span class="n">to</span> <span class="n">the</span> <span class="n">directory</span> <span class="n">where</span> <span class="n">the</span> <span class="n">result</span> <span class="n">file</span> <span class="n">shall</span> <span class="n">be</span>
+                        <span class="n">stored</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="n">preprocess</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">outprefix</span> <span class="n">OUTPREFIX</span>
+                        <span class="n">Prefix</span> <span class="n">of</span> <span class="n">output</span> <span class="n">files</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="n">query</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">mode</span> <span class="p">{</span><span class="n">single</span><span class="p">,</span><span class="n">cluster</span><span class="p">,</span><span class="n">both</span><span class="p">}</span>
+                        <span class="n">Output</span> <span class="n">expression</span> <span class="n">file</span> <span class="k">for</span> <span class="n">prediction</span><span class="o">.</span> <span class="n">single</span><span class="p">:</span> <span class="n">single</span><span class="o">-</span>
+                        <span class="n">cell</span> <span class="n">level</span><span class="o">.</span> <span class="n">cluster</span><span class="p">:</span> <span class="n">cluster</span> <span class="n">level</span><span class="o">.</span> <span class="n">both</span><span class="p">:</span> <span class="n">output</span> <span class="n">both</span>
+                        <span class="n">the</span> <span class="n">single</span><span class="o">-</span><span class="n">cell</span> <span class="n">level</span> <span class="ow">and</span> <span class="n">cluster</span> <span class="n">level</span> <span class="n">expression</span>
+                        <span class="n">profiles</span>
+</pre></div>
+</div>
+<p>Note that you must choose the mode for the returned expression profiles. In this step two output files will be generated:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">query_res.rds</span></code> : a seurat object with gene expression profile and dimension reduction result</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query_{single/cluster}_expr.txt</span></code> : expression matrix of query data for the prediction step</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="SELINA’s documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="run.html" class="btn btn-neutral float-right" title="Run SELINA" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Pengfei Ren.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

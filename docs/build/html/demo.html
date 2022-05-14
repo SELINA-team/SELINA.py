@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo &mdash; Selina v1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Run SELINA" href="run.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Selina
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="prepare.html">Prepare</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="run.html">Run SELINA</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Demo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data">1. Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preprocess-of-query-data">2. Preprocess of query data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#train">3. Train</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#predict">4. Predict</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Selina</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Demo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/demo.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="demo">
+<h1>Demo<a class="headerlink" href="#demo" title="Permalink to this headline"></a></h1>
+<p>This is an example to show you how to run selina step by step.</p>
+<section id="data">
+<h2>1. Data<a class="headerlink" href="#data" title="Permalink to this headline"></a></h2>
+<p>The data used in this vignette are orgnized as the following directory tree shows.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>├── query_data
+│   └── GSE139534_Lung-Adult_10462_gene_count.h5
+├── reference_data
+│   ├── GSE123405_Lung-Adult_7786_expr.txt
+│   ├── GSE123405_Lung-Adult_7786_meta.txt
+│   ├── GSE130148_Lung-Adult_2306_expr.txt
+│   ├── GSE130148_Lung-Adult_2306_meta.txt
+│   ├── GSE134355_Lung-Adult_5672_expr.txt
+│   ├── GSE134355_Lung-Adult_5672_meta.txt
+│   ├── GSE134355_Lung-Adult_8426_expr.txt
+│   ├── GSE134355_Lung-Adult_8426_meta.txt
+│   ├── GSE134355_Lung-Adult_9113_expr.txt
+│   ├── GSE134355_Lung-Adult_9113_meta.txt
+│   ├── GSE146981_Lung-Adult_27015_expr.txt
+│   └── GSE146981_Lung-Adult_27015_meta.txt
+└── res
+</pre></div>
+</div>
+<p>The query data used here is from <a class="reference external" href="https://www.nature.com/articles/s41467-020-18979-4">mTORC1 activation in lung mesenchyme drives sex- and age-dependent pulmonary structure and function decline</a>. The citation papers of the reference data are listed in the following table.</p>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th align="center">Dataset</th>
+<th align="center">Study</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">GSE123405_Lung-Adult_7786</td>
+<td align="center"><a href="https://respiratory-research.biomedcentral.com/articles/10.1186/s12931-020-01442-9">Cell-specific expression of lung disease risk-related genes in the human small airway epithelium</a></td>
+</tr>
+<tr>
+<td align="center">GSE130148_Lung-Adult_2306</td>
+<td align="center"><a href="https://www.nature.com/articles/s41591-019-0468-5">A cellular census of human lungs identifies novel cell states in health and in asthma</a></td>
+</tr>
+<tr>
+<td align="center">GSE134355_Lung-Adult_5672</td>
+<td align="center"><a href="https://www.nature.com/articles/s41586-020-2157-4">Construction of a human cell landscape at single-cell level</a></td>
+</tr>
+<tr>
+<td align="center">GSE134355_Lung-Adult_8426</td>
+<td align="center"><a href="https://www.nature.com/articles/s41586-020-2157-4">Construction of a human cell landscape at single-cell level</a></td>
+</tr>
+<tr>
+<td align="center">GSE134355_Lung-Adult_9113</td>
+<td align="center"><a href="https://www.nature.com/articles/s41586-020-2157-4">Construction of a human cell landscape at single-cell level</a></td>
+</tr>
+<tr>
+<td align="center">GSE146981_Lung-Adult_27015</td>
+<td align="center"><a href="https://www.atsjournals.org/doi/10.1164/rccm.202004-1274OC?url_ver=Z39.88-2003&amp;rfr_id=ori:rid:crossref.org&amp;rfr_dat=cr_pub%20%200pubmed">Senescence of Alveolar Type 2 Cells Drives Progressive Pulmonary Fibrosis</a></td>
+</tr>
+</tbody>
+</table><p>Specifically, the reference datasets are stored in the reference_data folder, and for each dataset there are two corresponding files used in the pretraining stage; one with <code class="docutils literal notranslate"><span class="pre">expr</span></code> provides the expression profile of each dataset, and the file with <code class="docutils literal notranslate"><span class="pre">meta</span></code> presents the cell type and sequencing platform of each cell. Here we take GSE123405_Lung-Adult_7786 as an example to show you the detail information.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GSE123405_Lung</span><span class="o">-</span><span class="n">Adult_7786_expr</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Gene</span> <span class="n">GSM3502715</span><span class="nd">@GTTAGCTTAATT</span> <span class="n">GSM3502715</span><span class="nd">@TCCCCTCTTCGC</span> <span class="n">GSM3502715</span><span class="nd">@TATTGTTTTACN</span> <span class="n">GSM3502715</span><span class="nd">@GACTTATTTATA</span>
+<span class="n">A2M</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">A4GALT</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="n">AAAS</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">0</span>
+<span class="n">AACS</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">AADAC</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GSE123405_Lung</span><span class="o">-</span><span class="n">Adult_7786_meta</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Celltype</span> <span class="n">Platform</span>
+<span class="n">Club</span> <span class="n">Drop</span><span class="o">-</span><span class="n">seq</span>
+<span class="n">Club</span> <span class="n">Drop</span><span class="o">-</span><span class="n">seq</span>
+<span class="n">Club</span> <span class="n">Drop</span><span class="o">-</span><span class="n">seq</span>
+<span class="n">Ciliated</span> <span class="n">Drop</span><span class="o">-</span><span class="n">seq</span>
+</pre></div>
+</div>
+</section>
+<section id="preprocess-of-query-data">
+<h2>2. Preprocess of query data<a class="headerlink" href="#preprocess-of-query-data" title="Permalink to this headline"></a></h2>
+<p>The following command is to normalize, match the assembly version with the reference data, perform dimension reduction for your data. We support 3 formats of input: <code class="docutils literal notranslate"><span class="pre">plain</span></code>,<code class="docutils literal notranslate"><span class="pre">h5</span></code> and <code class="docutils literal notranslate"><span class="pre">mtx</span></code>. The plain format is a gene by cell matrix.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">selina</span> <span class="n">preprocess</span> <span class="o">--</span><span class="nb">format</span> <span class="n">h5</span>  <span class="o">--</span><span class="n">matrix</span> <span class="n">query_data</span><span class="o">/</span><span class="n">GSE139534_Lung</span><span class="o">-</span><span class="n">Adult_10462_gene_count</span><span class="o">.</span><span class="n">h5</span> <span class="o">--</span><span class="n">gene</span><span class="o">-</span><span class="n">idtype</span> <span class="n">symbol</span> <span class="o">--</span><span class="n">assembly</span> <span class="n">GRCh38</span> <span class="o">--</span><span class="n">count</span><span class="o">-</span><span class="n">cutoff</span> <span class="mi">1000</span> <span class="o">--</span><span class="n">gene</span><span class="o">-</span><span class="n">cutoff</span> <span class="mi">500</span> <span class="o">--</span><span class="n">cell</span><span class="o">-</span><span class="n">cutoff</span> <span class="mi">10</span> <span class="o">--</span><span class="n">directory</span> <span class="n">res</span> <span class="o">--</span><span class="n">outprefix</span> <span class="n">query</span> <span class="o">--</span><span class="n">mode</span> <span class="n">single</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Normalization</span> <span class="ow">and</span> <span class="n">identify</span> <span class="n">variable</span> <span class="n">genes</span> <span class="o">...</span>
+<span class="n">Performing</span> <span class="n">log</span><span class="o">-</span><span class="n">normalization</span>
+<span class="mi">0</span><span class="o">%</span>   <span class="mi">10</span>   <span class="mi">20</span>   <span class="mi">30</span>   <span class="mi">40</span>   <span class="mi">50</span>   <span class="mi">60</span>   <span class="mi">70</span>   <span class="mi">80</span>   <span class="mi">90</span>   <span class="mi">100</span><span class="o">%</span>
+<span class="p">[</span><span class="o">----|----|----|----|----|----|----|----|----|----|</span>
+<span class="o">**************************************************|</span>
+<span class="n">Calculating</span> <span class="n">gene</span> <span class="n">variances</span>
+<span class="mi">0</span><span class="o">%</span>   <span class="mi">10</span>   <span class="mi">20</span>   <span class="mi">30</span>   <span class="mi">40</span>   <span class="mi">50</span>   <span class="mi">60</span>   <span class="mi">70</span>   <span class="mi">80</span>   <span class="mi">90</span>   <span class="mi">100</span><span class="o">%</span>
+<span class="p">[</span><span class="o">----|----|----|----|----|----|----|----|----|----|</span>
+<span class="o">**************************************************|</span>
+<span class="n">Calculating</span> <span class="n">feature</span> <span class="n">variances</span> <span class="n">of</span> <span class="n">standardized</span> <span class="ow">and</span> <span class="n">clipped</span> <span class="n">values</span>
+<span class="mi">0</span><span class="o">%</span>   <span class="mi">10</span>   <span class="mi">20</span>   <span class="mi">30</span>   <span class="mi">40</span>   <span class="mi">50</span>   <span class="mi">60</span>   <span class="mi">70</span>   <span class="mi">80</span>   <span class="mi">90</span>   <span class="mi">100</span><span class="o">%</span>
+<span class="p">[</span><span class="o">----|----|----|----|----|----|----|----|----|----|</span>
+<span class="o">**************************************************|</span>
+<span class="n">Regressing</span> <span class="n">out</span> <span class="n">nCount_RNA</span>
+  <span class="o">|======================================================================|</span> <span class="mi">100</span><span class="o">%</span>
+<span class="n">Centering</span> <span class="ow">and</span> <span class="n">scaling</span> <span class="n">data</span> <span class="n">matrix</span>
+  <span class="o">|======================================================================|</span> <span class="mi">100</span><span class="o">%</span>
+<span class="n">PCA</span> <span class="n">analysis</span> <span class="o">...</span>
+<span class="n">PC_</span> <span class="mi">1</span>
+<span class="n">Positive</span><span class="p">:</span>  <span class="n">TMSB4X</span><span class="p">,</span> <span class="n">SRGN</span><span class="p">,</span> <span class="n">VIM</span><span class="p">,</span> <span class="n">PECAM1</span><span class="p">,</span> <span class="n">HLA</span><span class="o">-</span><span class="n">E</span><span class="p">,</span> <span class="n">EMP3</span><span class="p">,</span> <span class="n">BST2</span><span class="p">,</span> <span class="n">GMFG</span><span class="p">,</span> <span class="n">HLA</span><span class="o">-</span><span class="n">C</span><span class="p">,</span> <span class="n">GRN</span>
+	   <span class="n">TXNIP</span><span class="p">,</span> <span class="n">TMSB10</span><span class="p">,</span> <span class="n">GSTO1</span><span class="p">,</span> <span class="n">SH3BGRL3</span><span class="p">,</span> <span class="n">ENG</span><span class="p">,</span> <span class="n">HLA</span><span class="o">-</span><span class="n">A</span><span class="p">,</span> <span class="n">HLA</span><span class="o">-</span><span class="n">B</span><span class="p">,</span> <span class="n">IFI27</span><span class="p">,</span> <span class="n">GPX3</span><span class="p">,</span> <span class="n">KLF4</span>
+	   <span class="n">FKBP1A</span><span class="p">,</span> <span class="n">AKR1B1</span><span class="p">,</span> <span class="n">GYPC</span><span class="p">,</span> <span class="n">TIMP1</span><span class="p">,</span> <span class="n">PLIN2</span><span class="p">,</span> <span class="n">GIMAP4</span><span class="p">,</span> <span class="n">IFNGR1</span><span class="p">,</span> <span class="n">CD68</span><span class="p">,</span> <span class="n">THBD</span><span class="p">,</span> <span class="n">ICAM2</span>
+<span class="n">Negative</span><span class="p">:</span>  <span class="n">C20orf85</span><span class="p">,</span> <span class="n">FAM183A</span><span class="p">,</span> <span class="n">C1orf194</span><span class="p">,</span> <span class="n">RSPH1</span><span class="p">,</span> <span class="n">TMEM190</span><span class="p">,</span> <span class="n">C9orf24</span><span class="p">,</span> <span class="n">LRRIQ1</span><span class="p">,</span> <span class="n">C11orf88</span><span class="p">,</span> <span class="n">SNTN</span><span class="p">,</span> <span class="n">C9orf116</span>
+	   <span class="n">DNAAF1</span><span class="p">,</span> <span class="n">FAM92B</span><span class="p">,</span> <span class="n">CCDC78</span><span class="p">,</span> <span class="n">DYNLRB2</span><span class="p">,</span> <span class="n">PIFO</span><span class="p">,</span> <span class="n">CAPS</span><span class="p">,</span> <span class="n">MS4A8</span><span class="p">,</span> <span class="n">C5orf49</span><span class="p">,</span> <span class="n">CAPSL</span><span class="p">,</span> <span class="n">CFAP126</span>
+	   <span class="n">ZMYND10</span><span class="p">,</span> <span class="n">TPPP3</span><span class="p">,</span> <span class="n">AC013264</span><span class="mf">.1</span><span class="p">,</span> <span class="n">MORN5</span><span class="p">,</span> <span class="n">TSPAN1</span><span class="p">,</span> <span class="n">RSPH9</span><span class="p">,</span> <span class="n">DYDC2</span><span class="p">,</span> <span class="n">CFAP53</span><span class="p">,</span> <span class="n">CCDC146</span><span class="p">,</span> <span class="n">DRC3</span>
+<span class="n">PC_</span> <span class="mi">2</span>
+<span class="n">Positive</span><span class="p">:</span>  <span class="n">SERPINA1</span><span class="p">,</span> <span class="n">MS4A7</span><span class="p">,</span> <span class="n">LGALS3BP</span><span class="p">,</span> <span class="n">VSIG4</span><span class="p">,</span> <span class="n">FTL</span><span class="p">,</span> <span class="n">MARCO</span><span class="p">,</span> <span class="n">SPI1</span><span class="p">,</span> <span class="n">FBP1</span><span class="p">,</span> <span class="n">ACP5</span><span class="p">,</span> <span class="n">C1orf162</span>
+	   <span class="n">CD163</span><span class="p">,</span> <span class="n">CAPG</span><span class="p">,</span> <span class="n">ALOX5AP</span><span class="p">,</span> <span class="n">MCEMP1</span><span class="p">,</span> <span class="n">OLR1</span><span class="p">,</span> <span class="n">AIF1</span><span class="p">,</span> <span class="n">EVI2B</span><span class="p">,</span> <span class="n">CD37</span><span class="p">,</span> <span class="n">GPNMB</span><span class="p">,</span> <span class="n">CD53</span>
+	   <span class="n">TREM1</span><span class="p">,</span> <span class="n">CSTA</span><span class="p">,</span> <span class="n">FCGR3A</span><span class="p">,</span> <span class="n">SNX10</span><span class="p">,</span> <span class="n">MS4A4A</span><span class="p">,</span> <span class="n">APOC1</span><span class="p">,</span> <span class="n">C1QC</span><span class="p">,</span> <span class="n">CD68</span><span class="p">,</span> <span class="n">CFD</span><span class="p">,</span> <span class="n">MSR1</span>
+<span class="n">Negative</span><span class="p">:</span>  <span class="n">TIMP3</span><span class="p">,</span> <span class="n">CLDN5</span><span class="p">,</span> <span class="n">SPARCL1</span><span class="p">,</span> <span class="n">RAMP2</span><span class="p">,</span> <span class="n">PCAT19</span><span class="p">,</span> <span class="n">SRPX</span><span class="p">,</span> <span class="n">VWF</span><span class="p">,</span> <span class="n">PRSS23</span><span class="p">,</span> <span class="n">IGFBP7</span><span class="p">,</span> <span class="n">HYAL2</span>
+	   <span class="n">MT1M</span><span class="p">,</span> <span class="n">NPDC1</span><span class="p">,</span> <span class="n">CLEC14A</span><span class="p">,</span> <span class="n">PTPRB</span><span class="p">,</span> <span class="n">CAV1</span><span class="p">,</span> <span class="n">GIMAP7</span><span class="p">,</span> <span class="n">SLCO2A1</span><span class="p">,</span> <span class="n">ID1</span><span class="p">,</span> <span class="n">CRIP2</span><span class="p">,</span> <span class="n">FAM107A</span>
+	   <span class="n">GNG11</span><span class="p">,</span> <span class="n">SLC9A3R2</span><span class="p">,</span> <span class="n">TM4SF1</span><span class="p">,</span> <span class="n">CAVIN1</span><span class="p">,</span> <span class="n">CALCRL</span><span class="p">,</span> <span class="n">TSPAN7</span><span class="p">,</span> <span class="n">EPAS1</span><span class="p">,</span> <span class="n">TINAGL1</span><span class="p">,</span> <span class="n">MT1X</span><span class="p">,</span> <span class="n">A2M</span>
+<span class="n">PC_</span> <span class="mi">3</span>
+<span class="n">Positive</span><span class="p">:</span>  <span class="n">SRGN</span><span class="p">,</span> <span class="n">B2M</span><span class="p">,</span> <span class="n">VIM</span><span class="p">,</span> <span class="n">CYBA</span><span class="p">,</span> <span class="n">GMFG</span><span class="p">,</span> <span class="n">MS4A7</span><span class="p">,</span> <span class="n">CD163</span><span class="p">,</span> <span class="n">LGALS1</span><span class="p">,</span> <span class="n">LAPTM5</span><span class="p">,</span> <span class="n">VSIG4</span>
+	   <span class="n">C1QC</span><span class="p">,</span> <span class="n">MARCO</span><span class="p">,</span> <span class="n">MRC1</span><span class="p">,</span> <span class="n">SPI1</span><span class="p">,</span> <span class="n">ALOX5AP</span><span class="p">,</span> <span class="n">C1orf162</span><span class="p">,</span> <span class="n">SLC11A1</span><span class="p">,</span> <span class="n">TYROBP</span><span class="p">,</span> <span class="n">INHBA</span><span class="p">,</span> <span class="n">AIF1</span>
+	   <span class="n">MSR1</span><span class="p">,</span> <span class="n">OLR1</span><span class="p">,</span> <span class="n">PDK4</span><span class="p">,</span> <span class="n">GPNMB</span><span class="p">,</span> <span class="n">ALOX5</span><span class="p">,</span> <span class="n">CFD</span><span class="p">,</span> <span class="n">SNX10</span><span class="p">,</span> <span class="n">IFI27</span><span class="p">,</span> <span class="n">CD68</span><span class="p">,</span> <span class="n">PECAM1</span>
+<span class="n">Negative</span><span class="p">:</span>  <span class="n">SFTA2</span><span class="p">,</span> <span class="n">HOPX</span><span class="p">,</span> <span class="n">PEBP4</span><span class="p">,</span> <span class="n">SFTPD</span><span class="p">,</span> <span class="n">NAPSA</span><span class="p">,</span> <span class="n">S100A14</span><span class="p">,</span> <span class="n">SFTA3</span><span class="p">,</span> <span class="n">PGC</span><span class="p">,</span> <span class="n">MUC1</span><span class="p">,</span> <span class="n">SFTPB</span>
+	   <span class="n">CLDN18</span><span class="p">,</span> <span class="n">SDR16C5</span><span class="p">,</span> <span class="n">CXCL17</span><span class="p">,</span> <span class="n">SOD3</span><span class="p">,</span> <span class="n">SLC34A2</span><span class="p">,</span> <span class="n">GKN2</span><span class="p">,</span> <span class="n">SLC39A8</span><span class="p">,</span> <span class="n">LAMP3</span><span class="p">,</span> <span class="n">SFTPA2</span><span class="p">,</span> <span class="n">C16orf89</span>
+	   <span class="n">ABCA3</span><span class="p">,</span> <span class="n">SFTPA1</span><span class="p">,</span> <span class="n">SELENOP</span><span class="p">,</span> <span class="n">TMEM97</span><span class="p">,</span> <span class="n">SFN</span><span class="p">,</span> <span class="n">PLA2G1B</span><span class="p">,</span> <span class="n">WIF1</span><span class="p">,</span> <span class="n">LPCAT1</span><span class="p">,</span> <span class="n">MFSD2A</span><span class="p">,</span> <span class="n">FASN</span>
+<span class="n">PC_</span> <span class="mi">4</span>
+<span class="n">Positive</span><span class="p">:</span>  <span class="n">CRYAB</span><span class="p">,</span> <span class="n">ACTA2</span><span class="p">,</span> <span class="n">WISP2</span><span class="p">,</span> <span class="n">PLN</span><span class="p">,</span> <span class="n">PPP1R14A</span><span class="p">,</span> <span class="n">ACTG2</span><span class="p">,</span> <span class="n">MYL9</span><span class="p">,</span> <span class="n">NEXN</span><span class="p">,</span> <span class="n">TPM2</span><span class="p">,</span> <span class="n">MYH11</span>
+	   <span class="n">CNN1</span><span class="p">,</span> <span class="n">LMOD1</span><span class="p">,</span> <span class="n">ADH1B</span><span class="p">,</span> <span class="n">DES</span><span class="p">,</span> <span class="n">COL6A2</span><span class="p">,</span> <span class="n">BGN</span><span class="p">,</span> <span class="n">MFAP4</span><span class="p">,</span> <span class="n">PDGFRB</span><span class="p">,</span> <span class="n">PRELP</span><span class="p">,</span> <span class="n">NTM</span>
+	   <span class="n">TAGLN</span><span class="p">,</span> <span class="n">NDUFA4L2</span><span class="p">,</span> <span class="n">KCNMB1</span><span class="p">,</span> <span class="n">FXYD1</span><span class="p">,</span> <span class="n">NOTCH3</span><span class="p">,</span> <span class="n">MAP1B</span><span class="p">,</span> <span class="n">TNNT2</span><span class="p">,</span> <span class="n">FMO2</span><span class="p">,</span> <span class="n">SCEL</span><span class="p">,</span> <span class="n">SPOCK2</span>
+<span class="n">Negative</span><span class="p">:</span>  <span class="n">CD74</span><span class="p">,</span> <span class="n">NPC2</span><span class="p">,</span> <span class="n">HLA</span><span class="o">-</span><span class="n">DRB1</span><span class="p">,</span> <span class="n">WIF1</span><span class="p">,</span> <span class="n">LAMP3</span><span class="p">,</span> <span class="n">SFTPA1</span><span class="p">,</span> <span class="n">SFTPA2</span><span class="p">,</span> <span class="n">MFSD2A</span><span class="p">,</span> <span class="n">CTSH</span><span class="p">,</span> <span class="n">LRRK2</span>
+	   <span class="n">SERPINA1</span><span class="p">,</span> <span class="n">TCIM</span><span class="p">,</span> <span class="n">PLA2G1B</span><span class="p">,</span> <span class="n">NEAT1</span><span class="p">,</span> <span class="n">SOCS3</span><span class="p">,</span> <span class="n">SFTPC</span><span class="p">,</span> <span class="n">TMEM97</span><span class="p">,</span> <span class="n">FABP5</span><span class="p">,</span> <span class="n">HLA</span><span class="o">-</span><span class="n">DRA</span><span class="p">,</span> <span class="n">HLA</span><span class="o">-</span><span class="n">DPA1</span>
+	   <span class="n">CXCL17</span><span class="p">,</span> <span class="n">FOS</span><span class="p">,</span> <span class="n">LIFR</span><span class="p">,</span> <span class="n">AQP1</span><span class="p">,</span> <span class="n">FCN3</span><span class="p">,</span> <span class="n">JUNB</span><span class="p">,</span> <span class="n">CYB5A</span><span class="p">,</span> <span class="n">HMGCS1</span><span class="p">,</span> <span class="n">FASN</span><span class="p">,</span> <span class="n">ABCA3</span>
+<span class="n">PC_</span> <span class="mi">5</span>
+<span class="n">Positive</span><span class="p">:</span>  <span class="n">NTM</span><span class="p">,</span> <span class="n">AGER</span><span class="p">,</span> <span class="n">SCEL</span><span class="p">,</span> <span class="n">RTKN2</span><span class="p">,</span> <span class="n">CEACAM6</span><span class="p">,</span> <span class="n">SPOCK2</span><span class="p">,</span> <span class="n">MS4A15</span><span class="p">,</span> <span class="n">ITLN2</span><span class="p">,</span> <span class="n">CLIC5</span><span class="p">,</span> <span class="n">GGTLC1</span>
+	   <span class="n">GGT1</span><span class="p">,</span> <span class="n">ABCA7</span><span class="p">,</span> <span class="n">MYRF</span><span class="p">,</span> <span class="n">SEMA3B</span><span class="p">,</span> <span class="n">TNNC1</span><span class="p">,</span> <span class="n">ANKRD29</span><span class="p">,</span> <span class="n">KLK11</span><span class="p">,</span> <span class="n">FMO2</span><span class="p">,</span> <span class="n">LAMA3</span><span class="p">,</span> <span class="n">COL12A1</span>
+	   <span class="n">C19orf33</span><span class="p">,</span> <span class="n">KRT7</span><span class="p">,</span> <span class="n">PLCXD2</span><span class="p">,</span> <span class="n">SLC1A1</span><span class="p">,</span> <span class="n">GPRC5A</span><span class="p">,</span> <span class="n">TACSTD2</span><span class="p">,</span> <span class="n">CST6</span><span class="p">,</span> <span class="n">ARHGEF26</span><span class="p">,</span> <span class="n">SCNN1B</span><span class="p">,</span> <span class="n">IL32</span>
+<span class="n">Negative</span><span class="p">:</span>  <span class="n">WISP2</span><span class="p">,</span> <span class="n">ACTA2</span><span class="p">,</span> <span class="n">PLN</span><span class="p">,</span> <span class="n">ACTG2</span><span class="p">,</span> <span class="n">MYH11</span><span class="p">,</span> <span class="n">LMOD1</span><span class="p">,</span> <span class="n">CNN1</span><span class="p">,</span> <span class="n">ADH1B</span><span class="p">,</span> <span class="n">PPP1R14A</span><span class="p">,</span> <span class="n">C11orf96</span>
+	   <span class="n">DES</span><span class="p">,</span> <span class="n">COL6A2</span><span class="p">,</span> <span class="n">BGN</span><span class="p">,</span> <span class="n">TPM2</span><span class="p">,</span> <span class="n">PDGFRB</span><span class="p">,</span> <span class="n">IGFBP6</span><span class="p">,</span> <span class="n">MFAP4</span><span class="p">,</span> <span class="n">WIF1</span><span class="p">,</span> <span class="n">PRELP</span><span class="p">,</span> <span class="n">FXYD1</span>
+	   <span class="n">LAMP3</span><span class="p">,</span> <span class="n">SOD3</span><span class="p">,</span> <span class="n">NDUFA4L2</span><span class="p">,</span> <span class="n">MFSD2A</span><span class="p">,</span> <span class="n">LRRK2</span><span class="p">,</span> <span class="n">SFTPA1</span><span class="p">,</span> <span class="n">MAP1B</span><span class="p">,</span> <span class="n">TNNT2</span><span class="p">,</span> <span class="n">PLA2G1B</span><span class="p">,</span> <span class="n">SFTPA2</span>
+<span class="n">UMAP</span> <span class="n">analysis</span> <span class="o">...</span>
+<span class="ne">Warning</span><span class="p">:</span> <span class="n">The</span> <span class="n">default</span> <span class="n">method</span> <span class="k">for</span> <span class="n">RunUMAP</span> <span class="n">has</span> <span class="n">changed</span> <span class="kn">from</span> <span class="nn">calling</span> <span class="n">Python</span> <span class="n">UMAP</span> <span class="n">via</span> <span class="n">reticulate</span> <span class="n">to</span> <span class="n">the</span> <span class="n">R</span><span class="o">-</span><span class="n">native</span> <span class="n">UWOT</span> <span class="n">using</span> <span class="n">the</span> <span class="n">cosine</span> <span class="n">metric</span>
+<span class="n">To</span> <span class="n">use</span> <span class="n">Python</span> <span class="n">UMAP</span> <span class="n">via</span> <span class="n">reticulate</span><span class="p">,</span> <span class="nb">set</span> <span class="n">umap</span><span class="o">.</span><span class="n">method</span> <span class="n">to</span> <span class="s1">&#39;umap-learn&#39;</span> <span class="ow">and</span> <span class="n">metric</span> <span class="n">to</span> <span class="s1">&#39;correlation&#39;</span>
+<span class="n">This</span> <span class="n">message</span> <span class="n">will</span> <span class="n">be</span> <span class="n">shown</span> <span class="n">once</span> <span class="n">per</span> <span class="n">session</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">39</span> <span class="n">UMAP</span> <span class="n">embedding</span> <span class="n">parameters</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">0.9922</span> <span class="n">b</span> <span class="o">=</span> <span class="mf">1.112</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">39</span> <span class="n">Read</span> <span class="mi">10453</span> <span class="n">rows</span> <span class="ow">and</span> <span class="n">found</span> <span class="mi">28</span> <span class="n">numeric</span> <span class="n">columns</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">39</span> <span class="n">Using</span> <span class="n">Annoy</span> <span class="k">for</span> <span class="n">neighbor</span> <span class="n">search</span><span class="p">,</span> <span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">39</span> <span class="n">Building</span> <span class="n">Annoy</span> <span class="n">index</span> <span class="k">with</span> <span class="n">metric</span> <span class="o">=</span> <span class="n">cosine</span><span class="p">,</span> <span class="n">n_trees</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="mi">0</span><span class="o">%</span>   <span class="mi">10</span>   <span class="mi">20</span>   <span class="mi">30</span>   <span class="mi">40</span>   <span class="mi">50</span>   <span class="mi">60</span>   <span class="mi">70</span>   <span class="mi">80</span>   <span class="mi">90</span>   <span class="mi">100</span><span class="o">%</span>
+<span class="p">[</span><span class="o">----|----|----|----|----|----|----|----|----|----|</span>
+<span class="o">**************************************************|</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">40</span> <span class="n">Writing</span> <span class="n">NN</span> <span class="n">index</span> <span class="n">file</span> <span class="n">to</span> <span class="n">temp</span> <span class="n">file</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">Rtmp0WAzsB</span><span class="o">/</span><span class="n">file2d504385ba56</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">40</span> <span class="n">Searching</span> <span class="n">Annoy</span> <span class="n">index</span> <span class="n">using</span> <span class="mi">1</span> <span class="n">thread</span><span class="p">,</span> <span class="n">search_k</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">43</span> <span class="n">Annoy</span> <span class="n">recall</span> <span class="o">=</span> <span class="mi">100</span><span class="o">%</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">43</span> <span class="n">Commencing</span> <span class="n">smooth</span> <span class="n">kNN</span> <span class="n">distance</span> <span class="n">calibration</span> <span class="n">using</span> <span class="mi">1</span> <span class="n">thread</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">43</span> <span class="n">Initializing</span> <span class="kn">from</span> <span class="nn">normalized</span> <span class="n">Laplacian</span> <span class="o">+</span> <span class="n">noise</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">44</span> <span class="n">Commencing</span> <span class="n">optimization</span> <span class="k">for</span> <span class="mi">200</span> <span class="n">epochs</span><span class="p">,</span> <span class="k">with</span> <span class="mi">457718</span> <span class="n">positive</span> <span class="n">edges</span>
+<span class="mi">0</span><span class="o">%</span>   <span class="mi">10</span>   <span class="mi">20</span>   <span class="mi">30</span>   <span class="mi">40</span>   <span class="mi">50</span>   <span class="mi">60</span>   <span class="mi">70</span>   <span class="mi">80</span>   <span class="mi">90</span>   <span class="mi">100</span><span class="o">%</span>
+<span class="p">[</span><span class="o">----|----|----|----|----|----|----|----|----|----|</span>
+<span class="o">**************************************************|</span>
+<span class="mi">10</span><span class="p">:</span><span class="mi">59</span><span class="p">:</span><span class="mi">48</span> <span class="n">Optimization</span> <span class="n">finished</span>
+<span class="n">Computing</span> <span class="n">nearest</span> <span class="n">neighbor</span> <span class="n">graph</span>
+<span class="n">Computing</span> <span class="n">SNN</span>
+<span class="n">Modularity</span> <span class="n">Optimizer</span> <span class="n">version</span> <span class="mf">1.3.0</span> <span class="n">by</span> <span class="n">Ludo</span> <span class="n">Waltman</span> <span class="ow">and</span> <span class="n">Nees</span> <span class="n">Jan</span> <span class="n">van</span> <span class="n">Eck</span>
+
+<span class="n">Number</span> <span class="n">of</span> <span class="n">nodes</span><span class="p">:</span> <span class="mi">10453</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">edges</span><span class="p">:</span> <span class="mi">419653</span>
+
+<span class="n">Running</span> <span class="n">Louvain</span> <span class="n">algorithm</span><span class="o">...</span>
+<span class="mi">0</span><span class="o">%</span>   <span class="mi">10</span>   <span class="mi">20</span>   <span class="mi">30</span>   <span class="mi">40</span>   <span class="mi">50</span>   <span class="mi">60</span>   <span class="mi">70</span>   <span class="mi">80</span>   <span class="mi">90</span>   <span class="mi">100</span><span class="o">%</span>
+<span class="p">[</span><span class="o">----|----|----|----|----|----|----|----|----|----|</span>
+<span class="o">**************************************************|</span>
+<span class="n">Maximum</span> <span class="n">modularity</span> <span class="ow">in</span> <span class="mi">10</span> <span class="n">random</span> <span class="n">starts</span><span class="p">:</span> <span class="mf">0.8941</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">communities</span><span class="p">:</span> <span class="mi">24</span>
+<span class="n">Elapsed</span> <span class="n">time</span><span class="p">:</span> <span class="mi">1</span> <span class="n">seconds</span>
+</pre></div>
+</div>
+<p>This step will output two files in the res folder.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1.</span> <span class="pre">query_res.rds</span></code> : a seurat object with gene expression profile and dimension reduction result</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">An</span> <span class="nb">object</span> <span class="n">of</span> <span class="k">class</span> <span class="nc">Seurat</span>
+<span class="mi">17547</span> <span class="n">features</span> <span class="n">across</span> <span class="mi">10453</span> <span class="n">samples</span> <span class="n">within</span> <span class="mi">1</span> <span class="n">assay</span>
+<span class="n">Active</span> <span class="n">assay</span><span class="p">:</span> <span class="n">RNA</span> <span class="p">(</span><span class="mi">17547</span> <span class="n">features</span><span class="p">,</span> <span class="mi">2000</span> <span class="n">variable</span> <span class="n">features</span><span class="p">)</span>
+<span class="mi">2</span> <span class="n">dimensional</span> <span class="n">reductions</span> <span class="n">calculated</span><span class="p">:</span> <span class="n">pca</span><span class="p">,</span> <span class="n">umap</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">2.</span> <span class="pre">query_single_expr.txt</span></code> : expression matrix of query data for the prediction step</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Gene</span> <span class="n">GSM4143262</span><span class="nd">@AAACCTGCATCAGTCA</span><span class="o">-</span><span class="mi">1</span> <span class="n">GSM4143262</span><span class="nd">@AAACCTGTCGGGAGTA</span><span class="o">-</span><span class="mi">1</span> <span class="n">GSM4143262</span><span class="nd">@AAAGTAGTCGGAATCT</span><span class="o">-</span><span class="mi">1</span> <span class="n">GSM4143262</span><span class="nd">@AACCATGCACGACGAA</span><span class="o">-</span><span class="mi">1</span>
+<span class="o">&lt;</span><span class="nb">chr</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">dbl</span><span class="o">&gt;</span>
+<span class="n">AL669831</span><span class="mf">.5</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">FAM87B</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">LINC00115</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">FAM41C</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">AL645608</span><span class="mf">.1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+<section id="train">
+<h2>3. Train<a class="headerlink" href="#train" title="Permalink to this headline"></a></h2>
+<p>This step is to train a model using the reference data listed above.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">selina</span> <span class="n">train</span> <span class="o">--</span><span class="n">path_in</span> <span class="n">reference_data</span> <span class="o">--</span><span class="n">path_out</span> <span class="n">res</span> <span class="o">--</span><span class="n">outprefix</span> <span class="n">pre</span><span class="o">-</span><span class="n">trained</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Loading data
+100% |██████████████████████████████████████████████████| Reading data [done]
+100% |██████████████████████████████████████████████████| Reading data [done]
+100% |██████████████████████████████████████████████████| Reading data [done]
+100% |██████████████████████████████████████████████████| Reading data [done]
+100% |██████████████████████████████████████████████████| Reading data [done]
+100% |██████████████████████████████████████████████████| Reading data [done]
+Begin training
+100%|████████████████████████████████████████████████████████████████████████| 50/50 [11:59&lt;00:00, 14.39s/it]
+Finish Training
+All done
+</pre></div>
+</div>
+<p>In this step, two output files used in the next step will be generated.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1.</span> <span class="pre">pre-trained_params.pt</span></code> : a file containing all parameters of the trained model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2.</span> <span class="pre">pre-trained_meta.pkl</span></code> : a file containing the cell types and genes of the reference data</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;res/pre-trained_meta.pkl&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="n">meta</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">meta</span><span class="p">[</span><span class="s1">&#39;genes&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">array</span><span class="p">([</span><span class="s1">&#39;A4GALT&#39;</span><span class="p">,</span> <span class="s1">&#39;AAAS&#39;</span><span class="p">,</span> <span class="s1">&#39;AACS&#39;</span><span class="p">,</span> <span class="s1">&#39;AADAC&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;&lt;U12&#39;</span><span class="p">)</span>
+
+<span class="n">meta</span><span class="p">[</span><span class="s1">&#39;celltypes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">dict_keys</span><span class="p">([</span><span class="s1">&#39;Mucous&#39;</span><span class="p">,</span> <span class="s1">&#39;CD8T&#39;</span><span class="p">,</span> <span class="s1">&#39;Fibroblast&#39;</span><span class="p">,</span> <span class="s1">&#39;Macrophage&#39;</span><span class="p">,</span> <span class="s1">&#39;Chondrocyte&#39;</span><span class="p">,</span> <span class="s1">&#39;DC&#39;</span><span class="p">,</span> <span class="s1">&#39;AT2&#39;</span><span class="p">,</span> <span class="s1">&#39;Endothelial_lv3&#39;</span><span class="p">,</span> <span class="s1">&#39;NK&#39;</span><span class="p">,</span> <span class="s1">&#39;Neutrophil&#39;</span><span class="p">,</span> <span class="s1">&#39;Alveolar Bipotent&#39;</span><span class="p">,</span> <span class="s1">&#39;AT1&#39;</span><span class="p">,</span> <span class="s1">&#39;Lymphatic Endothelial&#39;</span><span class="p">,</span> <span class="s1">&#39;Muscle&#39;</span><span class="p">,</span> <span class="s1">&#39;Mast&#39;</span><span class="p">,</span> <span class="s1">&#39;Secretory Epithelial&#39;</span><span class="p">,</span> <span class="s1">&#39;Club&#39;</span><span class="p">,</span> <span class="s1">&#39;Basal&#39;</span><span class="p">,</span> <span class="s1">&#39;Alveolar Bipotent Progenitor&#39;</span><span class="p">,</span> <span class="s1">&#39;Goblet&#39;</span><span class="p">,</span> <span class="s1">&#39;CD4T&#39;</span><span class="p">,</span> <span class="s1">&#39;Megakaryocyte&#39;</span><span class="p">,</span> <span class="s1">&#39;Intermediate(Club-Basal)&#39;</span><span class="p">,</span> <span class="s1">&#39;Ionocyte&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;Neuroendocrine&#39;</span><span class="p">,</span> <span class="s1">&#39;Ciliated&#39;</span><span class="p">,</span> <span class="s1">&#39;Monocyte&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="predict">
+<h2>4. Predict<a class="headerlink" href="#predict" title="Permalink to this headline"></a></h2>
+<p>Here you can choose to use our pretrained models (available on <a class="reference external" href="https://github.com/wanglabtongji/SELINA_reference">SELINA models</a>) or the model trained by yourself to annotate the query data.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">selina</span> <span class="n">predict</span> <span class="o">--</span><span class="n">mode</span> <span class="n">single</span> <span class="o">--</span><span class="nb">input</span> <span class="n">res</span><span class="o">/</span><span class="n">query_single_expr</span><span class="o">.</span><span class="n">txt</span> <span class="o">--</span><span class="n">model</span> <span class="n">res</span><span class="o">/</span><span class="n">pre</span><span class="o">-</span><span class="n">trained_params</span><span class="o">.</span><span class="n">pt</span> <span class="o">--</span><span class="n">path_out</span> <span class="n">res</span> <span class="o">--</span><span class="n">outprefix</span> <span class="n">query</span> <span class="o">--</span><span class="n">plot</span> <span class="kc">True</span> <span class="o">--</span><span class="n">rds</span> <span class="n">res</span><span class="o">/</span><span class="n">query_res</span><span class="o">.</span><span class="n">rds</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Loading data
+100% |██████████████████████████████████████████████████| Reading data [done]
+Fine-tuning1
+100%|████████████████████████████████████████████████████████████████████████| 50/50 [01:26&lt;00:00, 1.73s/it]
+Finish Tuning1
+Fine-tuning2
+100%|████████████████████████████████████████████████████████████████████████| 10/10 [00:24&lt;00:00, 2.49s/it]
+Finish Tuning2
+Finish Prediction
+Plotting
+Finish plotting
+</pre></div>
+</div>
+<p>This step will output three files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1.</span> <span class="pre">query_predictions.txt</span></code> : predicted cell type for each cell in the query data(choose the cell type corresponding to the max probablity as the default prediction results)</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Cell</span> <span class="n">Prediction</span>
+<span class="n">GSM4143262</span><span class="nd">@AAACCTGCATCAGTCA</span><span class="o">-</span><span class="mi">1</span> <span class="n">AT1</span>
+<span class="n">GSM4143262</span><span class="nd">@AAACCTGTCGGGAGTA</span><span class="o">-</span><span class="mi">1</span> <span class="n">AT1</span>
+<span class="n">GSM4143262</span><span class="nd">@AAAGTAGTCGGAATCT</span><span class="o">-</span><span class="mi">1</span> <span class="n">AT1</span>
+<span class="n">GSM4143262</span><span class="nd">@AACCATGCACGACGAA</span><span class="o">-</span><span class="mi">1</span> <span class="n">AT1</span>
+<span class="n">GSM4143262</span><span class="nd">@AACGTTGAGGCGCTCT</span><span class="o">-</span><span class="mi">1</span> <span class="n">AT1</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">2.</span> <span class="pre">query_probability.txt</span></code> : probablity of cells predicted as each of the reference cell types</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Mucous</span> <span class="n">CD8T</span> <span class="n">Fibroblast</span> <span class="n">Macrophage</span>
+<span class="n">GSM4143262</span><span class="nd">@AAACCTGCATCAGTCA</span><span class="o">-</span><span class="mi">1</span> <span class="mf">9.528222e-13</span> <span class="mf">3.493414e-26</span> <span class="mf">8.598993e-16</span> <span class="mf">2.151410e-10</span>
+<span class="n">GSM4143262</span><span class="nd">@AAACCTGTCGGGAGTA</span><span class="o">-</span><span class="mi">1</span> <span class="mf">6.421099e-15</span> <span class="mf">1.029570e-29</span> <span class="mf">4.329293e-17</span> <span class="mf">4.808651e-14</span>
+<span class="n">GSM4143262</span><span class="nd">@AAAGTAGTCGGAATCT</span><span class="o">-</span><span class="mi">1</span> <span class="mf">2.036562e-18</span> <span class="mf">2.974594e-34</span> <span class="mf">3.507774e-21</span> <span class="mf">3.168965e-19</span>
+<span class="n">GSM4143262</span><span class="nd">@AACCATGCACGACGAA</span><span class="o">-</span><span class="mi">1</span> <span class="mf">6.580991e-16</span> <span class="mf">4.516618e-29</span> <span class="mf">9.358461e-18</span> <span class="mf">5.502941e-14</span>
+<span class="n">GSM4143262</span><span class="nd">@AACGTTGAGGCGCTCT</span><span class="o">-</span><span class="mi">1</span> <span class="mf">2.829751e-13</span> <span class="mf">5.663002e-25</span> <span class="mf">3.487227e-16</span> <span class="mf">1.142975e-12</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">3.</span> <span class="pre">query_pred.png</span></code> : a umap png file with cell type annotation on it</p></li>
+</ul>
+<p><img alt="image" src="_images/query_pred.png" /></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="run.html" class="btn btn-neutral float-left" title="Run SELINA" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Pengfei Ren.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

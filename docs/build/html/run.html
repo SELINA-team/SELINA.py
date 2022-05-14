@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Run SELINA &mdash; Selina v1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Demo" href="demo.html" />
+    <link rel="prev" title="Prepare" href="prepare.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Selina
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="prepare.html">Prepare</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Run SELINA</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#train">Train</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#predict">Predict</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="demo.html">Demo</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Selina</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Run SELINA</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/run.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="run-selina">
+<h1>Run SELINA<a class="headerlink" href="#run-selina" title="Permalink to this headline"></a></h1>
+<section id="train">
+<h2>Train<a class="headerlink" href="#train" title="Permalink to this headline"></a></h2>
+<p>If you want to train a model with your own reference files, you can use the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">selina</span> <span class="n">train</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">--</span><span class="n">path_in</span> <span class="n">PATH_IN</span> <span class="o">--</span><span class="n">path_out</span> <span class="n">PATH_OUT</span>
+                     <span class="p">[</span><span class="o">--</span><span class="n">outprefix</span> <span class="n">OUTPREFIX</span><span class="p">]</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+  <span class="o">--</span><span class="n">path_in</span> <span class="n">PATH_IN</span>     <span class="n">File</span> <span class="n">path</span> <span class="n">of</span> <span class="n">training</span> <span class="n">datasets</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">path_out</span> <span class="n">PATH_OUT</span>   <span class="n">File</span> <span class="n">path</span> <span class="n">of</span> <span class="n">the</span> <span class="n">output</span> <span class="n">model</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">outprefix</span> <span class="n">OUTPREFIX</span> <span class="n">Prefix</span> <span class="n">of</span> <span class="n">the</span> <span class="n">output</span> <span class="n">files</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="n">pre</span><span class="o">-</span><span class="n">trained</span>
+</pre></div>
+</div>
+<p>In this step, two output files used in the next step will be generated.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pre-trained_params.pt</span></code> : a file containing all parameters of the trained model</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pre-trained_meta.pkl</span></code> : a file containing the cell types and genes of the reference data</p></li>
+</ul>
+</section>
+<section id="predict">
+<h2>Predict<a class="headerlink" href="#predict" title="Permalink to this headline"></a></h2>
+<p>Here you can choose to use our pre-trained models (available on <a class="reference external" href="https://github.com/wanglabtongji/SELINA_reference">SELINA models</a>) or the model trained by yourself to annotate the query data.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">selina</span> <span class="n">predict</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="o">--</span><span class="n">mode</span> <span class="p">{</span><span class="n">single</span><span class="p">,</span><span class="n">cluster</span><span class="p">}</span> <span class="o">--</span><span class="nb">input</span> <span class="n">INPUT</span> <span class="o">--</span><span class="n">model</span> <span class="n">MODEL</span>
+                       <span class="o">--</span><span class="n">path_out</span> <span class="n">PATH_OUT</span> <span class="p">[</span><span class="o">--</span><span class="n">outprefix</span> <span class="n">OUTPREFIX</span><span class="p">]</span> <span class="o">--</span><span class="n">plot</span>
+                       <span class="p">{</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">}</span> <span class="p">[</span><span class="o">--</span><span class="n">rds</span> <span class="n">RDS</span><span class="p">]</span>
+
+<span class="n">optional</span> <span class="n">arguments</span><span class="p">:</span>
+  <span class="o">-</span><span class="n">h</span><span class="p">,</span> <span class="o">--</span><span class="n">help</span>            <span class="n">show</span> <span class="n">this</span> <span class="n">help</span> <span class="n">message</span> <span class="ow">and</span> <span class="n">exit</span>
+
+<span class="n">Arguments</span> <span class="k">for</span> <span class="n">prediction</span><span class="o">.</span><span class="p">:</span>
+  <span class="o">--</span><span class="n">mode</span> <span class="p">{</span><span class="n">single</span><span class="p">,</span><span class="n">cluster</span><span class="p">}</span>
+                        <span class="n">Single</span><span class="o">-</span><span class="n">cell</span> <span class="n">level</span> <span class="nb">input</span> <span class="ow">or</span> <span class="n">cluster</span> <span class="n">level</span> <span class="nb">input</span><span class="o">.</span>
+  <span class="o">--</span><span class="nb">input</span> <span class="n">INPUT</span>         <span class="n">File</span> <span class="n">path</span> <span class="n">of</span> <span class="n">query</span> <span class="n">data</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">model</span> <span class="n">MODEL</span>         <span class="n">File</span> <span class="n">path</span> <span class="n">of</span> <span class="n">the</span> <span class="n">pre</span><span class="o">-</span><span class="n">trained</span> <span class="n">model</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">path_out</span> <span class="n">PATH_OUT</span>   <span class="n">File</span> <span class="n">path</span> <span class="n">of</span> <span class="n">the</span> <span class="n">output</span> <span class="n">files</span><span class="o">.</span>
+  <span class="o">--</span><span class="n">outprefix</span> <span class="n">OUTPREFIX</span>
+                        <span class="n">Prefix</span> <span class="n">of</span> <span class="n">the</span> <span class="n">output</span> <span class="n">files</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="n">query</span>
+
+<span class="n">Arguments</span> <span class="k">for</span> <span class="n">plot</span><span class="p">:</span>
+  <span class="o">--</span><span class="n">plot</span> <span class="p">{</span><span class="kc">True</span><span class="p">,</span><span class="kc">False</span><span class="p">}</span>   <span class="n">Whether</span> <span class="n">to</span> <span class="n">generate</span> <span class="n">umap</span> <span class="n">plot</span><span class="o">.</span> <span class="n">DEFAULT</span><span class="p">:</span> <span class="kc">False</span>
+  <span class="o">--</span><span class="n">rds</span> <span class="n">RDS</span>             <span class="n">File</span> <span class="n">path</span> <span class="n">of</span> <span class="n">rds</span> <span class="n">file</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>This step will output three files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">query_predictions.txt</span></code> : predicted cell type for each cell in the query data(choose the cell type corresponding to the max probablity as the default prediction results)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query_probability.txt</span></code> : probablity of cells predicted as each of the reference cell types</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">query_pred.png</span></code> : a umap png file with cell type annotation on it</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="prepare.html" class="btn btn-neutral float-left" title="Prepare" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="demo.html" class="btn btn-neutral float-right" title="Demo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Pengfei Ren.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
