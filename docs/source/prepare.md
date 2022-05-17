@@ -62,7 +62,7 @@ usage: selina preprocess [-h] --format {h5,mtx,plain} [--matrix MATRIX]
                          [--mito-cutoff MITO_CUTOFF]
                          [--variable-genes VARIABLE_GENES] [--npcs NPCS]
                          [--cluster-res CLUSTER_RES] [--directory DIRECTORY]
-                         [--outprefix OUTPREFIX] --mode {single,cluster,both}
+                         [--outprefix OUTPREFIX]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -124,18 +124,13 @@ Output arguments:
                         stored. DEFAULT: preprocess.
   --outprefix OUTPREFIX
                         Prefix of output files. DEFAULT: query.
-  --mode {single,cluster,both}
-                        Output expression file for prediction. single: single-
-                        cell level. cluster: cluster level. both: output both
-                        the single-cell level and cluster level expression
-                        profiles
 ```
 
-Note that you must choose the mode for the returned expression profile(single-cell or cluster level). In this step four output files will be generated:
+In this step four output files will be generated:
 
 - `query_res.rds`: a seurat object storing the normalized data, dimension reduction and clustering results
 
-- `query_{single/cluster}_expr.txt`: expression matrix of query data in single-cell level or cluster level for the prediction step.
+- `query_expr.txt`: expression matrix of query data in single-cell level
 
 - `query_cluster.png`: UMAP plot with cluster labels
 

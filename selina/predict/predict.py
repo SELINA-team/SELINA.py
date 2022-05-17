@@ -25,12 +25,6 @@ def predict_parser(subparsers):
     workflow = subparsers.add_parser(
         'predict', help='Fine-tuning and predict for the query data. ')
     group_input = workflow.add_argument_group('Arguments for input')
-    group_input.add_argument(
-        '--mode',
-        type=str,
-        required=True,
-        choices=['single', 'cluster'],
-        help='Single-cell level input or cluster level input.')
     group_input.add_argument('--query-expr',
                              dest='query_expr',
                              type=str,
@@ -217,7 +211,7 @@ def test(test_df, network, ct_dic):
     return pred_labels, pred_prob
 
 
-def query_predict(query_expr, model, path_out, outprefix, disease, mode):
+def query_predict(query_expr, model, path_out, outprefix, disease):
     print('Loading data')
     query_expr = read_expr(query_expr)
     with open(model.replace('params', 'meta').replace('pt', 'pkl'), 'rb') as f:
@@ -227,7 +221,7 @@ def query_predict(query_expr, model, path_out, outprefix, disease, mode):
     nfeatures, nct = len(genes), len(ct_dic)
     network = torch.load(model, map_location=device)
     network = Autoencoder(network, nfeatures, nct)
-    if (not disease) & (mode != 'cluster'):
+    if (not disease):
         print('Fine-tuning1')
         network = tune1(query_expr, network, params_tune1)
         print('Fine-tuning2')
@@ -253,12 +247,12 @@ def query_predict(query_expr, model, path_out, outprefix, disease, mode):
     print('Finish Prediction')
 
 
-def predict_downstream(mode, seurat, cell_cutoff, prob_cutoff, path_out,
+def predict_downstream(seurat, cell_cutoff, prob_cutoff, path_out,
                        outprefix):
     print('Begin downstream analysis')
     cmd = 'Rscript ' + os.path.split(
         os.path.abspath(__file__)
-    )[0] + '/downstream.R ' + ' --mode ' + mode + ' --seurat ' + seurat + ' --pred_label ' + path_out + '/' + outprefix + '_predictions.txt' + ' --pred_prob ' + path_out + '/' + outprefix + '_probability.txt' + ' --cell_cutoff ' + str(
+    )[0] + '/downstream.R ' + ' --seurat ' + seurat + ' --pred_label ' + path_out + '/' + outprefix + '_predictions.txt' + ' --pred_prob ' + path_out + '/' + outprefix + '_probability.txt' + ' --cell_cutoff ' + str(
         cell_cutoff) + ' --prob_cutoff ' + str(
             prob_cutoff
         ) + ' --path_out ' + path_out + '  --outprefix ' + outprefix

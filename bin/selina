@@ -40,18 +40,15 @@ def main():
                          variable_genes=args.variable_genes,
                          npcs=args.npcs,
                          cluster_res=args.cluster_res,
-                         assembly=args.assembly,
-                         mode=args.mode)
+                         assembly=args.assembly)
 
     elif args.subcommand == 'predict':
         query_predict(query_expr=args.query_expr,
                       model=args.model,
                       path_out=args.path_out,
                       outprefix=args.outprefix,
-                      disease=args.disease,
-                      mode=args.mode)
+                      disease=args.disease)
         predict_downstream(
-            mode=args.mode,
             seurat=args.seurat,
             cell_cutoff=args.cell_cutoff,
             prob_cutoff=args.prob_cutoff,

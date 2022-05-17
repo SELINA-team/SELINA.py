@@ -25,7 +25,7 @@ In this step, two output files used in the next step will be generated.
 Here you can choose one model from our pre-trained models (available on [SELINA models](https://github.com/wanglabtongji/SELINA_reference)) or the model trained by yourself to annotate the query data.
 
 ```
-usage: selina predict [-h] --mode {single,cluster} --query-expr QUERY_EXPR
+usage: selina predict [-h] --query-expr QUERY_EXPR
                       --model MODEL --seurat SEURAT [--disease]
                       [--cell-cutoff CELL_CUTOFF] [--prob-cutoff PROB_CUTOFF]
                       [--path-out PATH_OUT] [--outprefix OUTPREFIX]
@@ -34,8 +34,6 @@ optional arguments:
   -h, --help            show this help message and exit
 
 Arguments for input.:
-  --mode {single,cluster}
-                        Single-cell level input or cluster level input.
   --query-expr QUERY_EXPR
                         File path of query data matrix.
   --model MODEL         File path of the pre-trained model.
@@ -56,7 +54,7 @@ Output Arguments:
                         Prefix of the output files. DEFAULT: query
 ```
 
-This step will output four files:
+This step will output eight files:
 
 - `query_predictions.txt`: predicted cell type for each cell in the query data
 
@@ -65,8 +63,6 @@ This step will output four files:
 - `query_pred.png`: UMAP plot with cell type labels
 
 - `query_DiffGenes.tsv`: differentially expressed genes for each cell type
-
-if the input data is one single-cell level expression matrix, four additional files will be generated, which are:
 
 - `query_cluster_prob.png`: box plot indicating the prediction probability distribution of cells in each cluster
 

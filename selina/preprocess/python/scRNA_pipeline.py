@@ -140,20 +140,13 @@ def preprocess_parser(subparsers):
                               dest="outprefix",
                               default="query",
                               help="Prefix of output files. DEFAULT: query.")
-    group_output.add_argument(
-        "--mode",
-        dest="mode",
-        choices=["single", "cluster", 'both'],
-        required=True,
-        help=
-        "Output expression file for prediction. single: single-cell level. cluster: cluster level. both: output both the single-cell level and cluster level expression profiles"
-    )
+
 
 
 # Generate Rscript
 def GenerateRscript(count_file, gene_idtype, assembly, cell_cutoff, mito,
                     mito_cutoff, variable_genes, npcs, cluster_res, outprefix,
-                    directory, mode):
+                    directory):
 
     rfile = os.path.join(directory, "%s.R" % (outprefix))
     outf = open(rfile, "w")
@@ -223,10 +216,9 @@ def GenerateRscript(count_file, gene_idtype, assembly, cell_cutoff, mito,
                             npcs = %d,
                             cluster.res = %f,
                             outdir = "%s",
-                            mode = "%s",
                             outprefix = "%s")
     ''' % (outprefix, cell_cutoff, mito, mito_cutoff, variable_genes, npcs,
-           cluster_res, directory, mode, outprefix)
+           cluster_res, directory, outprefix)
     outf.write(script)
 
     #========save seurat object========
@@ -251,7 +243,7 @@ def GenerateRscript(count_file, gene_idtype, assembly, cell_cutoff, mito,
 def query_preprocess(directory, outprefix, fileformat, matrix, separator,
                      feature, gene_column, gene_idtype, barcode, count_cutoff,
                      gene_cutoff, cell_cutoff, mito, mito_cutoff,
-                     variable_genes, npcs, cluster_res, assembly, mode):
+                     variable_genes, npcs, cluster_res, assembly):
 
     try:
         os.makedirs(directory)
@@ -269,7 +261,7 @@ def query_preprocess(directory, outprefix, fileformat, matrix, separator,
 
     rscript = GenerateRscript(count_file, gene_idtype, assembly, cell_cutoff,
                               mito, mito_cutoff, variable_genes, npcs,
-                              cluster_res, outprefix, directory, mode)
+                              cluster_res, outprefix, directory)
 
     cmd = "Rscript %s" % (rscript)
     os.system(cmd)

@@ -72,7 +72,7 @@ Ciliated Drop-seq
 The following command is to normalize, convert the genes to version hg38 and symbol names, perform dimension reduction and clustering for your data. SELINA supports 3 formats of input: `plain`,`h5` and `mtx`. The gene by cell matrix is in plain format.
 
 ```
-selina preprocess --format plain --matrix ./query_data/GSE139534_Lung-Adult_10462_expr.txt --separator tab --gene-idtype symbol --assembly GRCh38 --count-cutoff 1000 --gene-cutoff 500 --cell-cutoff 10 --mito --mito-cutoff 0.2 --variable-genes 2000 --npcs 30 --cluster-res 0.6 --directory ./res/preprocess/example1 --outprefix example1 --mode single
+selina preprocess --format plain --matrix ./query_data/GSE139534_Lung-Adult_10462_expr.txt --separator tab --gene-idtype symbol --assembly GRCh38 --count-cutoff 1000 --gene-cutoff 500 --cell-cutoff 10 --mito --mito-cutoff 0.2 --variable-genes 2000 --npcs 30 --cluster-res 0.6 --directory ./res/preprocess/example1 --outprefix example1
 ```
 
 ```
@@ -257,7 +257,7 @@ dict_keys(['Mucous', 'CD8T', 'Fibroblast', 'Macrophage', 'Chondrocyte', 'DC', 'A
 Here you can choose to use our pre-trained models (available on [SELINA models](https://github.com/SELINA-team/SELINA-reference/tree/main/Normal/)) or the model trained by yourself to annotate the query data.
 
 ```
-selina predict --mode single --query-expr ./res/preprocess/example1/example1_single_expr.txt  --model ./res/pre-train/pre-trained_params.pt --seurat ./res/preprocess/example1/example1_res.rds --cell-cutoff 5 --prob-cutoff 0.9 --path-out ./res/predict/example1 --outprefix example1
+selina predict --query-expr ./res/preprocess/example1/example1_single_expr.txt  --model ./res/pre-train/pre-trained_params.pt --seurat ./res/preprocess/example1/example1_res.rds --cell-cutoff 5 --prob-cutoff 0.9 --path-out ./res/predict/example1 --outprefix example1
 ```
 
 ```
@@ -350,7 +350,7 @@ The data used here is one dataset with non-small-cell lung carcinoma(NSCLC) from
 ### 2. Preprocess of query data
 
 ```
-selina preprocess --format mtx --matrix ./query_data/matrix.mtx --feature ./query_data/genes.tsv --gene-column 2 --barcode ./query_data/barcodes.tsv --gene-idtype symbol --assembly GRCh38 --count-cutoff 0 --gene-cutoff 0 --cell-cutoff 0 --variable-genes 2000 --npcs 30 --cluster-res 0.6 --directory ./res/preprocess/example2/ --outprefix ./example2 --mode single
+selina preprocess --format mtx --matrix ./query_data/matrix.mtx --feature ./query_data/genes.tsv --gene-column 2 --barcode ./query_data/barcodes.tsv --gene-idtype symbol --assembly GRCh38 --count-cutoff 0 --gene-cutoff 0 --cell-cutoff 0 --variable-genes 2000 --npcs 30 --cluster-res 0.6 --directory ./res/preprocess/example2/ --outprefix ./example2
 ```
 
 This command will output four files that are similar to the results in example1 except for the `prefix.spikein.png`.
@@ -360,7 +360,7 @@ This command will output four files that are similar to the results in example1 
 Here we used the [pre-trained model](https://github.com/SELINA-team/SELINA-reference/tree/main/Disease/) provided by SELINA to predict for the NSCLC data, thus the pre-training step can be skipped. Note that the `--disease` argument is added in the following command.
 
 ```
-selina predict --mode single --query-expr ./res/preprocess/example2/example2_single_expr.txt  --model ./res/pre-train/Lung_params.pt --seurat ./res/preprocess/example2/example2_res.rds --cell-cutoff 5 --prob-cutoff 0.9 --path-out ./res/predict/example2 --outprefix example2 --disease
+selina predict --query-expr ./res/preprocess/example2/example2_single_expr.txt  --model ./res/pre-train/Lung_params.pt --seurat ./res/preprocess/example2/example2_res.rds --cell-cutoff 5 --prob-cutoff 0.9 --path-out ./res/predict/example2 --outprefix example2 --disease
 ```
 
 Here we just show the pictures in the results.

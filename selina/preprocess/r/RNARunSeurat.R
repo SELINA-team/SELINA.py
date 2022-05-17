@@ -1,5 +1,5 @@
 RNARunSeurat <- function(inputMat, project, 
-                         min.c, mito, mito.cutoff, variable.genes, npcs, cluster.res, outdir, mode, outprefix) {
+                         min.c, mito, mito.cutoff, variable.genes, npcs, cluster.res, outdir, outprefix) {
   SeuratObj <- CreateSeuratObject(inputMat, project = project, min.cells = min.c)
 
   #=========Mitochondria and Spike-in========  
@@ -56,14 +56,7 @@ RNARunSeurat <- function(inputMat, project,
   cluster_exprmat <- cbind(genes, cluster_exprmat)
 
   #output expression matrix
-  if (mode == 'single') {
-    fwrite(single_exprmat, file.path(outdir, paste0(outprefix, "_single_expr.txt")), row.names = FALSE, col.names = TRUE, sep = '\t', quote = FALSE)
-  } else if (mode == 'cluster') {
-    fwrite(cluster_exprmat, file.path(outdir, paste0(outprefix, "_cluster_expr.txt")), row.names = FALSE, col.names = TRUE, sep = '\t', quote = FALSE)
-  } else {
-    fwrite(single_exprmat, file.path(outdir, paste0(outprefix, "_single_expr.txt")), row.names = FALSE, col.names = TRUE, sep = '\t', quote = FALSE)
-    fwrite(cluster_exprmat, file.path(outdir, paste0(outprefix, "_cluster_expr.txt")), row.names = FALSE, col.names = TRUE, sep = '\t', quote = FALSE)
-  }
+  fwrite(single_exprmat, file.path(outdir, paste0(outprefix, "_expr.txt")), row.names = FALSE, col.names = TRUE, sep = '\t', quote = FALSE)
   if (length(unique(SeuratObj$seurat_clusters))>1){
     cluster.genes <- FindMarkers(object = SeuratObj, cluster = SeuratObj$seurat_clusters)
     return(list(SeuratObj,cluster.genes))
