@@ -30,7 +30,7 @@ SELINA is a deep learning-based framework for single-cell assignment with multip
   - r-gtools=3.9.2
   - r-devtools=2.4.3
 
-All the dependency packages will be installed simultaneously using the following commands except for the presto which can be found at [presto](https://github.com/immunogenomics/presto). The R package devtools used in the installation of presto has been included in SELINA, so you do not need to install devtools again.
+All the dependency packages will be installed simultaneously using the following commands except for the presto which can be found at [presto](https://github.com/immunogenomics/presto). The R package devtools used in the installation of presto has been included in SELINA, so you do not need to install devtools again. The installation process takes only a few minutes.
 
 ```
 conda create -n Selina
@@ -48,7 +48,7 @@ conda install pytorch cudatoolkit
 
 ### Preprocess of query data
 
-This step is to normalize, convert the genes to version hg38 and symbol names, perform dimension reduction and clustering for your data. SELINA supports 3 formats of input: `plain`,`h5` and `mtx`. The gene by cell matrix is in plain format. Below are examples of the commands for preprocessing different formats of input data. We provide an example query file with plain format in the demos folder.
+This step is to normalize, convert the genes to version hg38 and symbol names, perform dimension reduction and clustering for your data. SELINA supports 3 formats of input: `plain`,`h5` and `mtx`. The gene by cell matrix is in plain format. Below are examples of the commands for preprocessing different formats of input data. We provide an example query file with plain format in the demos folder. Test on the example data can be finished within minute.
 
 ```
 #mtx
@@ -73,7 +73,7 @@ Running any one of the above commands will generate four output files:
 
 ### Pre-training of the reference data
 
-In this step you can train a model using your own reference data with the following command. We provide two example reference files in the demos folder.
+In this step you can train a model using your own reference data with the following command. We provide two example reference files in the demos folder. The training process of the example takes only a few minutes.
 
 ```
 selina train --path-in ./reference/ --path-out ./res/pre-train
