@@ -48,7 +48,7 @@ conda install pytorch cudatoolkit
 
 ### Preprocess of query data
 
-This step is to normalize, convert the genes to version hg38 and symbol names, perform dimension reduction and clustering for your data. SELINA supports 3 formats of input: `plain`,`h5` and `mtx`. The gene by cell matrix is in plain format. Below are examples of the commands for preprocessing different formats of input data. We provide an example query file with plain format in the demos folder. Test on the example data can be finished within minute.
+This step is to normalize, convert the genes to version hg38 and symbol names, perform dimension reduction and clustering for your data. SELINA supports 3 formats of input: `plain`,`h5` and `mtx`. The gene by cell matrix is in plain format. Below are examples of the commands for preprocessing different formats of input data. We provide an example query file with plain format in the demos folder. Preprocessing of the example data can be finished within minutes.
 
 ```
 #mtx
@@ -93,7 +93,7 @@ You should known more details about the reference desposited in the github befor
 - The models that can be loaded in python are stored under `python` folder and the models that can be loaded in R are stored under `r`
 - The models in `Normal` folder were trained with all datasets in each tissue. The models in `Panimmune` folder were trained with the tissue-specific cells and a collection of immune cells from multiple tissues and contained more comprehensive immunce features. These models from five tissues were used to annotate type 2 diabetes and four kinds of cancer datasets in the SELINA paper.
 
-Since the expression profiles of disease data may deviate a lot from normal data and the difference is caused by biological factors instead of the technical factors, we removed the fine-tuning step when predicting for the disease data, this can be achieved by adding `--disease` to the command as the following command shows.
+Since the expression profiles of disease data may deviate a lot from normal data and the difference is caused by biological factors instead of the technical factors, we removed the fine-tuning step when predicting for the disease data, this can be achieved by adding `--disease` to the command as the following command shows. Prediction of the example data can be finished within one minute.
 
 ```
 selina predict --query-expr ./res/preprocess/query_expr.txt --model ./res/pre-train/pre-trained_params.pt --seurat ./res/preprocess/query_res.rds --path-out ./res/predict/disease --disease
