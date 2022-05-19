@@ -22,7 +22,14 @@ In this step, two output files used in the next step will be generated.
 
 ## Predict
 
-Here you can choose one model from our pre-trained models (available on [SELINA models](https://github.com/wanglabtongji/SELINA_reference)) or the model trained by yourself to annotate the query data.
+Here you can choose one model from our pre-trained models (available on [SELINA models](https://github.com/SELINA-team/SELINA-reference)) or the model trained by yourself to annotate the query data.
+
+You should known more details about the reference desposited in the github before using them.
+
+- The models that can be loaded in python are stored under `python` folder and the models that can be loaded in R are stored under `r`
+- The models in `Normal` folder were trained with all datasets in each tissue. The models in `Panimmune` folder were trained with the tissue-specific cells and a collection of immune cells from multiple tissues and contained more comprehensive immunce features. These models from five tissues were used to annotate type 2 diabetes and four kinds of cancer datasets in the SELINA paper.
+
+Since the expression profiles of disease data may deviate a lot from normal data and the difference is caused by biological factors instead of the technical factors, we removed the fine-tuning step when predicting for the disease data, this can be achieved by adding `--disease` to the command as the following command shows.
 
 ```
 usage: selina predict [-h] --query-expr QUERY_EXPR
