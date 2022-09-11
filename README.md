@@ -7,7 +7,7 @@ Currently there are two modes in SELINA: normal mode for normal datasets predict
 
 ## Workflow
 
-![image](https://github.com/pfren1998/SELINA/blob/main/docs/source/_images/workflow.png)
+![image](https://github.com/SELINA-team/SELINA.py/blob/main/docs/source/_images/workflow.png)
 
 ## Installation
 
