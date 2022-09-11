@@ -21,6 +21,6 @@ setuptools.setup(
     install_requires=[
         'torch>=1.10.0', 'datatable>=0.11.1', 'pandas>=1.3.4', 'numpy>=1.21.2',
         'tqdm>=4.62.3', 'h5py>=3.4.0', 'tables>=3.6.1', 'scipy>=1.6.3',
-        'imblearn>=0.8.1'
+        'imbalanced-learn>=0.8.1'
     ],
     scripts=['bin/selina'])

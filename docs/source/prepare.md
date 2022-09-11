@@ -13,7 +13,7 @@ conda activate Selina
 All the dependency packages will be installed simultaneously with the following commands except for the presto which can be found at [presto](https://github.com/immunogenomics/presto). The R package devtools used in the installation of presto has been included in SELINA, so you do not need to install devtools once again.
 
 ```
-conda install -c pfren selina -c conda-forge -c r
+conda install -c conda-forge -c r -c bioconda -c pfren selina
 ```
 
 Note that if you have gpu on your device and want to use it, you should additionally run the following command to install cudatoolkit and the paired version of pytorch and cudnn.
