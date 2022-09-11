@@ -1,0 +1,59 @@
+# Prepare
+
+## Install
+
+```
+conda create Selina
+conda activate Selina
+```
+
+Before you start to install Selina, make sure you have install the following R packages.
+
+- Seurat
+- presto
+- ggplot2
+- dplyr
+- data.table
+
+```
+pip install Selina
+```
+
+## Prepare data
+
+### Training data
+
+```
+reference/
+├── train1_expr.txt
+├── train1_meta.txt
+├── train2_expr.txt
+└── train2_meta.txt
+```
+
+expr
+
+| Gene  | Cell1 | Cell2 |
+| :---: | :---: | :---: |
+| NOC2L |   7   |   3   |
+| ISG15 |  10   |   2   |
+
+meta
+
+| Celltype | Platform |
+| :------: | :------: |
+|  Cell1   |   10x    |
+|  Cell2   |   10x    |
+
+### Query data
+
+
+## Preprocess
+
+# Run Selina
+
+## Train
+
+## Predict
+
+## Plot

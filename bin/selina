@@ -1,0 +1,67 @@
+#!/usr/bin/env/ python3
+import argparse as ap
+from selina.train import train_parser, train_model, GRL, MADA
+from selina.preprocess.python.scRNA_pipeline import preprocess_parser, query_preprocess
+from selina.predict.predict import predict_parser, query_predict, predict_downstream
+import os
+
+
+def main():
+
+    parser = ap.ArgumentParser()
+    subparsers = parser.add_subparsers(dest="subcommand")
+
+    train_parser(subparsers)
+    preprocess_parser(subparsers)
+    predict_parser(subparsers)
+
+    args = parser.parse_args()
+
+    if args.subcommand == 'train':
+        train_model(path_in=args.path_in,
+                    path_out=args.path_out,
+                    disease=args.disease,
+                    outprefix=args.outprefix)
+
+    elif args.subcommand == 'preprocess':
+        query_preprocess(directory=args.directory,
+                         outprefix=args.outprefix,
+                         fileformat=args.format,
+                         matrix=args.matrix,
+                         separator=args.separator,
+                         feature=args.feature,
+                         gene_column=args.gene_column,
+                         gene_idtype=args.gene_idtype,
+                         barcode=args.barcode,
+                         count_cutoff=args.count_cutoff,
+                         gene_cutoff=args.gene_cutoff,
+                         cell_cutoff=args.cell_cutoff,
+                         mito=args.mito,
+                         mito_cutoff=args.mito_cutoff,
+                         variable_genes=args.variable_genes,
+                         npcs=args.npcs,
+                         cluster_res=args.cluster_res,
+                         assembly=args.assembly)
+
+    elif args.subcommand == 'predict':
+        query_predict(query_expr=args.query_expr,
+                      model=args.model,
+                      path_out=args.path_out,
+                      outprefix=args.outprefix,
+                      disease=args.disease)
+        predict_downstream(
+            seurat=args.seurat,
+            prob_cutoff=args.prob_cutoff,
+            path_out=args.path_out,
+            outprefix=args.outprefix,
+        )
+
+    else:
+        parser.print_help()
+        exit(1)
+
+    exit(0)
+
+
+if __name__ == '__main__':
+    main()
