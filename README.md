@@ -105,7 +105,7 @@ if it is in disease mode, an extra file will be generated:
 
 ## Documentation
 
-For further details of usage, please refer to [SELINA documentation](https://selina.readthedocs.io/en/latest/)
+For further details of usage, please refer to [SELINA documentation](https://selinapy.readthedocs.io/en/latest/index.html)
 
 ## Citation
 
