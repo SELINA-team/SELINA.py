@@ -107,6 +107,12 @@ if it is in disease mode, an extra file will be generated:
 
 For further details of usage, please refer to [SELINA documentation](https://selinapy.readthedocs.io/en/latest/index.html)
 
+## Change Log
+
+#### v0.1
+
+- Release SELINA with normal and disease modes.
+
 ## Citation
 
 Pengfei Ren, Xiaoying Shi, Taiwen Li, Chenfei Wang. SELINA: Single-cell Assignment using Multiple-Adversarial Domain Adaptation Network with Large-scale References
