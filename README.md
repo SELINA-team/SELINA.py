@@ -15,7 +15,6 @@ Currently there are two modes in SELINA: normal mode for normal datasets predict
   - python=3.9.7
   - datatable=0.11.1
   - pytorch=1.10.0
-  - python=3.9.7
   - pandas=1.3.4
   - tqdm=4.62.3
   - h5py=3.4.0
