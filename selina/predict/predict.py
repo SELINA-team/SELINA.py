@@ -266,7 +266,7 @@ def query_predict(query_expr, model, path_out, outprefix, disease):
                                      index=False,
                                      header=False,
                                      sep='\t')
-    pd.DataFrame(pred_prob).to_csv(path_out + '/' + outprefix +
+    pd.DataFrame(pred_prob).fillna(0).to_csv(path_out + '/' + outprefix +
                                    '_probability.txt',
                                    index=True,
                                    header=True,
